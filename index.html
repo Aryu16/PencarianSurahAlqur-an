@@ -13,13 +13,17 @@
 
 <body>
     <main>
-        <form>
-            <label for="surah">Nomor Surah:</label>
-            <input type="text" id="surah" name="surah"><br><br>
-            <label for="awal">Ayat Awal:</label>
-            <input type="text" id="awal" name="awal"><br><br>
-            <label for="akhir">Ayat Akhir:</label>
-            <input type="text" id="akhir" name="akhir"><br><br>
+        <h1>Pencarian Ayat Al-Quran</h1>
+        <form id="form-cari">
+            <label for="nomor_surah">Nomor Surah:</label>
+            <input type="number" name="nomor_surah" id="nomor_surah" min="1" max="114" required>
+            <br>
+            <label for="ayat_awal">Ayat Awal:</label>
+            <input type="number" name="ayat_awal" id="ayat_awal" min="1" required>
+            <br>
+            <label for="ayat_akhir">Ayat Akhir:</label>
+            <input type="number" name="ayat_akhir" id="ayat_akhir" min="1" required>
+            <br>
             <button type="submit">Cari</button>
         </form>
         <div id="hasil"></div>
