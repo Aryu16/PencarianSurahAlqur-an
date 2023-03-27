@@ -10,9 +10,10 @@ form.addEventListener('submit', async function(event) {
 
   const response = await fetch(`https://api.alquran.cloud/v1/ayah/${surah}:${awal}-${akhir}`);
   const data = await response.json();
-
+  console.log(data);
+  
   let html = '';
-  data.data.forEach(ayah => {
+  data.forEach(ayah => {
     html += `<p>${ayah.text}</p>`;
   });
 
