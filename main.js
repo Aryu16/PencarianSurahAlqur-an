@@ -18,7 +18,7 @@ form.addEventListener("submit", function(e) {
       let html = "";
 
       data.forEach(function(ayah) {
-        html += `<p><strong>${ayah.ayah}</strong> (${ayah.surah.name} ${ayah.surah.number}:${ayah.numberInSurah}) - ${ayah.text}</p>`;
+        html += `<p><strong>${ayah.ayah}</strong> (${ayah.surah.englishName} ${ayah.surah.number}:${ayah.numberInSurah}) - ${ayah.text}</p>`;
       });
 
       hasil.innerHTML = html;
@@ -26,7 +26,7 @@ form.addEventListener("submit", function(e) {
   })
   .then(data => {
     if (data.code === 200) {
-      console.log(data.data);
+      console.log(data.data.surah.englishName);
     } else {
       console.log(`Error: ${data.code} - ${data.message}`);
     }
