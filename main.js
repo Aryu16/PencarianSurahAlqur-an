@@ -1,31 +1,21 @@
-const form = document.getElementById("form-cari");
-const hasil = document.getElementById("hasil");
+const form = document.querySelector('form');
+const hasil = document.querySelector('#hasil');
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
+form.addEventListener('submit', async function(event) {
+  event.preventDefault();
 
-  const nomorSurah = this.querySelector('input[name="nomor_surah"]').value;
-  const ayatAwal = this.querySelector('input[name="ayat_awal"]').value;
-  const ayatAkhir = this.querySelector('input[name="ayat_akhir"]').value;
+  const surah = form.elements.surah.value;
+  const awal = form.elements.awal.value;
+  const akhir = form.elements.akhir.value;
 
-  fetch(`https://api.alquran.cloud/v1/ayah/${nomorSurah}:${ayatAwal}-${ayatAkhir}`)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    if(Array.isArray(data)) {
-      let html = "";
+  const response = await fetch(`https://api.alquran.cloud/v1/ayah/${surah}:${awal}-${akhir}`);
+  const data = await response.json();
+  console.log(data);
 
-      data.forEach(function(ayah) {
-        html += `<p><strong>${ayah.ayah}</strong> (${ayah.surah.name} ${ayah.surah.number}:${ayah.numberInSurah}) - ${ayah.text}</p>`;
-      });
-
-      hasil.innerHTML = html;
-    } else {
-      hasil.innerHTML = "Data yang ditemukan tidak valid";
-    }
-  })
-  .catch(function(error) {
-    hasil.innerHTML = "Terjadi kesalahan dalam mengambil data dari server";
+  let html = '';
+  data.forEach(ayah => {
+    html += `<p>${ayah.text}</p>`;
   });
+
+  hasil.innerHTML = html;
 });
